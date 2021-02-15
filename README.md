@@ -76,7 +76,7 @@ The following document will guide you through the steps needed to create a ***Ne
 2.3-	Copy and Paste (CTRL+SHIFT+’V’) the command below in your Cloud Shell session.
 
 ```
-wafnsg=ocid1.networksecuritygroup.oc1.eu-frankfurt-1.aaaaaaaxxxxx
+wafnsgid=ocid1.networksecuritygroup.oc1.eu-frankfurt-1.aaaaaaaxxxxx
 ```
 (Replace ‘ocid1.networksecuritygroup.oc1.eu-frankfurt-1.aaaaaaaxxxxx’ by your NSG OCID copied in the previous step.)
 
