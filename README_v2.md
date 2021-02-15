@@ -94,6 +94,10 @@ rm -f waf_nsg_rule_443.sh
 wget https://raw.githubusercontent.com/BaptisS/oci_waf_nsg_v2/main/waf_nsg_rule_443.sh
 chmod +x waf_nsg_rule_443.sh
 
+rm -f waf_nsg_rule_80.sh
+wget https://raw.githubusercontent.com/BaptisS/oci_waf_nsg_v2/main/waf_nsg_rule_80.sh
+chmod +x waf_nsg_rule_80.sh
+
 wafips=$(oci waas edge-subnet list --all)
 wafcidrs=$(echo $wafips | jq '.data[] | .cidr')
 
