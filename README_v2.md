@@ -106,6 +106,12 @@ echo "]" >> waf_nsg_443.json
 sed -i 's+66.254.103.241+66.254.103.241/32+g' waf_nsg_443.json                                            
 sed -zr 's/,([^,]*$)/\1/' waf_nsg_443.json > waf_nsg_443_fixed.json
 
+wafips=$(oci waas edge-subnet list --all)
+wafcidrs=$(echo $wafips | jq '.data[] | .cidr')
+
+rm -f waf_nsg_80.json
+rm -f waf_nsg_80_fixed.json
+
 echo "["  >> waf_nsg_80.json
 for cidr in $wafcidrs; do ./waf_nsg_rule_80.sh $cidr ; done
 echo "]" >> waf_nsg_80.json
