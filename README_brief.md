@@ -37,7 +37,7 @@ chmod +x waf_nsg_rule_80_build.sh
 
 
 
-1.3-	Allow inbound **HTTP (TCP80) and HTTPS (TCP443) in a single Network Security Group**
+1.3-	Allow inbound **HTTP (TCP80) and HTTPS (TCP443) in a single Network Security Group**  ('Security Rules per NSG' service limits needs to be increased first.)
 
 1.3.1- Create an enpty Network Security Group. (Copy its OCID)
 
