@@ -15,6 +15,9 @@ The following document will guide you through the steps needed to create a ***Ne
 
 > ***Important Note:*** 
 > If your Web Application sits behind a Load Balancer, Security rules must be applied to your Load Balancer subnet (Security Lists) or to your Load Balancer Network Interfaces (Security Groups).
+>
+> Before running the procedure below, you would need to raise a 'Service Limit Increase Request' in order to create more than 120 Security Rules (Default Limit) in a Network Security Group.     
+
 
 
 ***Prerequisites:***
@@ -89,69 +92,10 @@ wafnsgid=ocid1.networksecuritygroup.oc1.eu-frankfurt-1.aaaaaaaxxxxx
 2.4.1- Copy and Paste (_CTRL+SHIFT+V_) the commands below in your Cloud Shell session.
 
 ```
-#!/bin/bash
-rm -f waf_nsg_rule_443.sh
-wget https://raw.githubusercontent.com/BaptisS/oci_waf_nsg_v2/main/waf_nsg_rule_443.sh
-chmod +x waf_nsg_rule_443.sh
-
-rm -f waf_nsg_rule_80.sh
-wget https://raw.githubusercontent.com/BaptisS/oci_waf_nsg_v2/main/waf_nsg_rule_80.sh
-chmod +x waf_nsg_rule_80.sh
-
-wafips=$(oci waas edge-subnet list --all)
-wafcidrs=$(echo $wafips | jq '.data[] | .cidr')
-
-rm -f waf_nsg_443.json
-rm -f waf_nsg_443_fixed.json
-
-echo "["  >> waf_nsg_443.json
-for cidr in $wafcidrs; do ./waf_nsg_rule_443.sh $cidr ; done
-echo "]" >> waf_nsg_443.json
-sed -i 's+66.254.103.241+66.254.103.241/32+g' waf_nsg_443.json                                            
-sed -zr 's/,([^,]*$)/\1/' waf_nsg_443.json > waf_nsg_443_fixed.json
-
-wafips=$(oci waas edge-subnet list --all)
-wafcidrs=$(echo $wafips | jq '.data[] | .cidr')
-
-rm -f waf_nsg_80.json
-rm -f waf_nsg_80_fixed.json
-
-echo "["  >> waf_nsg_80.json
-for cidr in $wafcidrs; do ./waf_nsg_rule_80.sh $cidr ; done
-echo "]" >> waf_nsg_80.json
-sed -i 's+66.254.103.241+66.254.103.241/32+g' waf_nsg_80.json                                            
-sed -zr 's/,([^,]*$)/\1/' waf_nsg_80.json > waf_nsg_80_fixed.json
-
-rm -f waf_nsg_80_fixed_lines_splitted*
-rm -f waf_nsg_80_fixed_lines.json
-rm -f waf_nsg_443_fixed_lines_splitted*
-rm -f waf_nsg_443_fixed_lines.json
-
-jq -c '.[]' waf_nsg_443_fixed.json >> waf_nsg_443_fixed_lines.json
-split -l 20 waf_nsg_443_fixed_lines.json waf_nsg_443_fixed_lines_splitted
-wafnsgrulelists=$(find waf_nsg_443_fixed_lines_splitted*)
-for nsgrulesfile in $wafnsgrulelists; do sed -i '$!s/$/,/' $nsgrulesfile ; done
-for nsgrulesfile in $wafnsgrulelists; do sed -i '1s/^/[\n/' $nsgrulesfile ; done
-for nsgrulesfile in $wafnsgrulelists; do echo "]" >> $nsgrulesfile ; done
-for nsgrulesfile in $wafnsgrulelists; do oci network nsg rules add --nsg-id $wafnsgid --security-rules file://$nsgrulesfile ; done
-
-jq -c '.[]' waf_nsg_80_fixed.json >> waf_nsg_80_fixed_lines.json
-split -l 20 waf_nsg_80_fixed_lines.json waf_nsg_80_fixed_lines_splitted
-wafnsgrulelists=$(find waf_nsg_80_fixed_lines_splitted*)
-for nsgrulesfile in $wafnsgrulelists; do sed -i '$!s/$/,/' $nsgrulesfile ; done
-for nsgrulesfile in $wafnsgrulelists; do sed -i '1s/^/[\n/' $nsgrulesfile ; done
-for nsgrulesfile in $wafnsgrulelists; do echo "]" >> $nsgrulesfile ; done
-for nsgrulesfile in $wafnsgrulelists; do oci network nsg rules add --nsg-id $wafnsgid --security-rules file://$nsgrulesfile ; done
-
-rm -f waf_nsg_443_fixed_lines_splitted*
-rm -f waf_nsg_443.json
-rm -f waf_nsg_443_fixed.json
-rm -f waf_nsg_rule_443.sh
-
-rm -f waf_nsg_80_fixed_lines_splitted*
-rm -f waf_nsg_80.json
-rm -f waf_nsg_80_fixed.json
-rm -f waf_nsg_rule_80.sh
+rm -f waf_nsg_rule_80_443_build.sh
+wget https://raw.githubusercontent.com/BaptisS/oci_waf_nsg_v2/main/waf_nsg_rule_80_443_build.sh
+chmod +x waf_nsg_rule_80_443_build.sh
+./waf_nsg_rule_80_443_build.sh
 ```
 
 
