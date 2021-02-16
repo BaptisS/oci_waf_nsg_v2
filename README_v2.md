@@ -24,6 +24,7 @@ The following document will guide you through the steps needed to create a ***Ne
 
 - An OCI user account with enough permissions to create and assign Network Security Groups in the desired Compartment / VCN. 
 - At least one Virtual Cloud Network, one Subnet and one Network Interface (LBaaS , Compute, etc.) already created. 
+- Service Limit Increase Request (#Security Rules per NSG) raised and completed. 
  
  
  
