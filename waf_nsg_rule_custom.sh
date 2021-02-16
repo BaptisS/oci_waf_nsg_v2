@@ -1,6 +1,6 @@
 #!/bin/bash
 #https://docs.oracle.com/en-us/iaas/api/#/en/iaas/20160918/datatypes/AddSecurityRuleDetails
-echo "  {" >> waf_nsg_$1.json
+echo "  {" >> waf_nsg_$2.json
 echo "        \"description\": null,">> waf_nsg_$2.json
 echo "        \"destination\": null,">> waf_nsg_$2.json
 echo "        \"destination-type\": null,">> waf_nsg_$2.json
