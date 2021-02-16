@@ -3,7 +3,8 @@
 rm -f waf_nsg_rule_custom.sh
 wget https://raw.githubusercontent.com/BaptisS/oci_waf_nsg_v2/main/waf_nsg_rule_custom.sh
 chmod +x waf_nsg_rule_custom.sh
-
+TCPport=$1
+echo $TCPport
 wafips=$(oci waas edge-subnet list --all)
 wafcidrs=$(echo $wafips | jq '.data[] | .cidr')
 
