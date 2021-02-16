@@ -8,8 +8,7 @@ When using a Web Application Firewall, it is important to apply a set of securit
 OCI WAF stand in front of your web application to detect and block unwanted/malicious access. In most cases, your Web Application itself sits behind a Load Balancer. Depending on your architecture and preferences, you may want to assign security rules to your Load Balancer or Web Application _subnets_ by using a _Security List_, or alternatively you may prefer to assign security rules to your Load Balancer or Web Application _Network Interfaces_ by using a _Network Security Group_.
 
 
-The following document will guide you through the steps needed to create a ***Network Security Group*** , import Security Rules and assign the desired LBaaS/Compute Virtual Network Interface to it. If you prefer to use _Security Lists_ for this purpose please consult the following guide : https://github.com/BaptisS/oci_waf_seclist
-
+The following document will guide you through the steps needed to create a ***Network Security Group*** , import Security Rules and assign the desired LBaaS/Compute Virtual Network Interface to it. If you prefer to use _Security Lists_ for this purpose please consult the following guide : https://github.com/BaptisS/oci_waf_seclist_v2
 
 
 
