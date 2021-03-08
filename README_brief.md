@@ -8,7 +8,7 @@
 
 
 ```
-wafnsgid=ocid1.networksecuritygroup.oc1.eu-frankfurt-1.aaaaaaaxxxxx
+export wafnsgid=ocid1.networksecuritygroup.oc1.eu-frankfurt-1.aaaaaaaxxxxx
 
 rm -f waf_nsg_rule_build.sh
 wget https://raw.githubusercontent.com/BaptisS/oci_waf_nsg_v2/main/waf_nsg_rule_443_build.sh
@@ -27,7 +27,7 @@ chmod +x waf_nsg_rule_443_build.sh
 
 
 ```
-wafnsgid=ocid1.networksecuritygroup.oc1.eu-frankfurt-1.aaaaaaaxxxxx
+export wafnsgid=ocid1.networksecuritygroup.oc1.eu-frankfurt-1.aaaaaaaxxxxx
 
 rm -f waf_nsg_rule_80_build.sh
 wget https://raw.githubusercontent.com/BaptisS/oci_waf_nsg_v2/main/waf_nsg_rule_80_build.sh
@@ -48,7 +48,7 @@ chmod +x waf_nsg_rule_80_build.sh
 
 
 ```
-wafnsgid=ocid1.networksecuritygroup.oc1.eu-frankfurt-1.aaaaaaaxxxxx
+export wafnsgid=ocid1.networksecuritygroup.oc1.eu-frankfurt-1.aaaaaaaxxxxx
 
 rm -f waf_nsg_rule_80_443_build.sh
 wget https://raw.githubusercontent.com/BaptisS/oci_waf_nsg_v2/main/waf_nsg_rule_80_443_build.sh
@@ -57,7 +57,7 @@ chmod +x waf_nsg_rule_80_443_build.sh
 ```
 
 
-1.4-	Allow inbound **Custom Port**
+1.4-	Allow inbound **Custom Port** 
 
 1.4.1- Create an enpty Network Security Group. (Copy its OCID)
 
@@ -68,7 +68,7 @@ chmod +x waf_nsg_rule_80_443_build.sh
 (Replace ‘8080’ by desired TCP port number.)
 
 ```
-wafnsgid=ocid1.networksecuritygroup.oc1.eu-frankfurt-1.aaaaaaaxxxxx
+export wafnsgid=ocid1.networksecuritygroup.oc1.eu-frankfurt-1.aaaaaaaxxxxx
 TCPport=8080
 
 rm -f waf_nsg_rule_custom_build.sh
